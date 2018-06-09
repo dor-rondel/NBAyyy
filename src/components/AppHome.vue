@@ -43,10 +43,10 @@ export default {
     }
   },
 
+  methods: {
     /** Action done for when user submits search, wil redirect to 
      *  the appropriate page using vue-router
      */
-  methods: {
     doSearch () {
       console.log(this.getNameArray[0], this.getNameArray[1])
       // return this.$router.push('/search')
@@ -70,26 +70,27 @@ video
 main
     .about-container
         background-color rgba(255, 255, 255, 0.8)
-        margin-top 20vh
+        margin-top 18vh
         z-index 1
         font-family 'Titillium Web', sans-serif
         border 2px solid #333
         border-radius 10px
+        padding 10px 0px
 
         @media (max-width: 350px)
             margin-top 2vh
 
         @media (min-width: 351px) and (max-width: 400px)
-            margin-top 5vh
+            margin-top 4vh
 
         @media (min-width: 401px) and (max-width: 450px)
-            margin-top 12vh
+            margin-top 10vh
 
         @media (min-width: 451px) and (max-width: 500px)
-            margin-top 15vh
+            margin-top 13vh
 
         @media (min-width: 551px) and (max-width: 600px)
-            margin-top 17vh
+            margin-top 15vh
 
         h2
             text-align center

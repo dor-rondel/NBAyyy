@@ -99,11 +99,11 @@ nav
     display flex
 
     @media (min-width: 350px) and (max-width: 400px)
-      margin-left 25%
+      margin-left 17%
       padding-right 40%
 
     @media (min-width: 401px) and (max-width: 450px)
-      margin-left 35%
+      margin-left 25%
       padding-right 50%
 
     @media (min-width: 451px) and (max-width: 500px)
