@@ -1,6 +1,5 @@
 import test from 'ava'
 import { shallow } from 'vue-test-utils'
-import Vue from 'vue'
 import AppHome from '../../src/components/AppHome.vue'
 
 // AppHome.vue
