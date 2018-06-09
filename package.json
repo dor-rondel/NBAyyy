@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "cd test && ava"
+    "test": "ava test/**/*.spec.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -20,17 +20,34 @@
     "@vue/cli-plugin-babel": "^3.0.0-beta.15",
     "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
     "@vue/cli-service": "^3.0.0-beta.15",
+    "@vue/cli-service-global": "^3.0.0-beta.16",
     "@vue/eslint-config-standard": "^3.0.0-beta.15",
     "ava": "^0.25.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-stage-2": "^6.24.1",
     "file-loader": "^1.1.11",
+    "jsdom": "^11.11.0",
+    "jsdom-global": "^3.0.2",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",
+    "require-extension-hooks": "^0.3.2",
+    "require-extension-hooks-babel": "^0.1.1",
+    "require-extension-hooks-vue": "^1.0.0",
+    "sinon": "^5.1.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "transform-runtime": "0.0.0",
     "url-loader": "^1.0.1",
     "vue-loader": "^15.2.4",
-    "vue-template-compiler": "^2.5.16"
+    "vue-template-compiler": "^2.5.16",
+    "vue-test-utils": "^1.0.0-beta.11"
+  },
+  "ava": {
+    "require": [
+      "./test/helpers/setup.js"
+    ]
   },
   "browserslist": [
     "> 1%",

@@ -44,12 +44,14 @@ export default {
   },
 
   methods: {
-    /** Action done for when user submits search, wil redirect to 
+    /** Action done for when user submits search, wil redirect to
      *  the appropriate page using vue-router
      */
     doSearch () {
-      console.log(this.getNameArray[0], this.getNameArray[1])
-      // return this.$router.push('/search')
+      if (!this.playerName === '') { // enforce required attribute
+        console.log(this.getNameArray[0], this.getNameArray[1])
+        // this.$router.push('dfdf')
+      }
     }
   }
 }
