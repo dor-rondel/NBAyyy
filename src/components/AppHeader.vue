@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-content
+  .app-header-wrapper
     // Mobile
     v-navigation-drawer(temporary app v-model="sideNav")
       v-list
@@ -11,7 +11,7 @@
           v-list-tile-content {{ item.name }}
 
     // Tablet & Desktop
-    v-toolbar(flat)
+    v-toolbar(flat color="rgba(0, 0, 0, 0.1)")
       v-icon.hidden-sm-and-up(@click.stop="sideNav = !sideNav") fas fa-bars
       v-toolbar-title.title
         router-link(to="/" exact)
@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import url('https://fonts.googleapis.com/css?family=Chewy');
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
 
 lightRed = #ef5350
 
@@ -84,10 +84,11 @@ lightRed = #ef5350
   display none
 
 nav
-  background-color rgba(0, 0, 0, 0)
+  z-index 2
+  background-color transparent
 
   .title
-    font-family 'Chewy', cursive
+    font-family 'Audiowide', cursive
     padding-bottom 0.18em
 
   a
@@ -97,17 +98,25 @@ nav
   .style-side-by-side
     display flex
 
-    @media (max-width: 400px)
+    @media (min-width: 350px) and (max-width: 400px)
       margin-left 25%
       padding-right 40%
 
-    @media (min-width: 401px) and (max-width: 500px)
+    @media (min-width: 401px) and (max-width: 450px)
       margin-left 35%
       padding-right 50%
 
+    @media (min-width: 451px) and (max-width: 500px)
+      margin-left 40%
+      padding-right 45%
+
     @media (min-width: 501px) and (max-width: 600px)
       margin-left 45%
-      padding-right 55%
+      padding-right 50%
+
+    @media (min-width: 551px) and (max-width: 600px)
+      margin-left 50%
+      padding-right 60%
 
     i
       margin-right 0.5em
