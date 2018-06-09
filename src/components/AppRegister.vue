@@ -3,8 +3,8 @@
         v-layout(row)
             v-flex(xs12 sm6 offset-sm3)
                 v-card
-                    v-card-title(primary-title).headline Login
-                    v-card-text.instructions Fill out the form below in order to login to NBAyyy.
+                    v-card-title(primary-title).headline Register
+                    v-card-text.instructions Fill out the form below in order to register to NBAyyy.
                     v-container
                         form
                             v-layout(row)
@@ -13,21 +13,30 @@
                                                 label="E-mail"
                                                 v-model="email"
                                                 color="red lighten-1"
-                                                required
-                                                prepend-icon="far fa-envelope")
+                                                prepend-icon="far fa-envelope"
+                                                required)
                             v-layout(row)
                                 v-flex(xs12 sm10 md8 offset-sm1 offset-md2)
                                     v-text-field(type="text"
                                                 label="Password"
                                                 v-model="password"
                                                 color="red lighten-1"
-                                                required
-                                                prepend-icon="fas fa-key")
+                                                prepend-icon="fas fa-key"
+                                                required)
+                                                        v-layout(row)
+                            v-flex(xs12 sm10 md8 offset-sm1 offset-md2)
+                                v-text-field(type="text"
+                                            label="Confirm password"
+                                            v-model="confirmedPass"
+                                            color="red lighten-1"
+                                            prepend-icon="fas fa-check-circle"
+                                            required
+                                            :rules="[passwordsMatch, passwordValidLength]")
                             br
                             v-layout(row justify-center)
                                 v-flex(xs8 offset-xs2 sm6 offset-sm3)
                                     v-btn(color="red lighten-1"
-                                          @click.prevent="doLogin").white--text Login!
+                                          @click.prevent="doRegister").white--text Register!
 </template>
 
 <script>
@@ -37,16 +46,29 @@ export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      confirmedPass: ''
     }
   },
 
   methods: {
-    doLogin () {
+    doRegister () {
       console.log('button pressed')
-      // log onto firebase
+      // register firebase
       // update vuex store
       // this.$router.push('/profile')
+    }
+  },
+
+  computed: {
+    passwordsMatch () {
+      return (this.password === this.confirmedPass) ? true : 'Passwords do not match'
+    },
+
+    passwordValidLength () {
+      return (this.password.length >= 6 && this.confirmedPass.length >= 6)
+      // eslint-disable-next-line
+                  ? true : 'Passwords must be at least 6 characters long'
     }
   }
 }
