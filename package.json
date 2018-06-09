@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "cd test && ava"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -20,6 +21,7 @@
     "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
     "@vue/cli-service": "^3.0.0-beta.15",
     "@vue/eslint-config-standard": "^3.0.0-beta.15",
+    "ava": "^0.25.0",
     "file-loader": "^1.1.11",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
