@@ -15,3 +15,17 @@ test('Should return array words in string sentence', t => {
 
 	t.deepEqual(actual, expected)
 })
+
+test('Should return array words in string sentence', t => {
+	const expected = 'Lebron'
+	const wrapper = shallow(AppHome)
+	
+	wrapper.setData({
+		playerName: 'LEbron James'
+	})
+
+	const nameArray = wrapper.vm['$options'].computed.getNameArray.call(wrapper.vm)
+	const actual = wrapper.vm['$options'].methods.makeCapitalCased(nameArray[0])
+								
+	t.is(actual, expected, 'Properly makes word capital-cased')
+})

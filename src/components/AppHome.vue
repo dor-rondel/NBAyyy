@@ -35,12 +35,13 @@ export default {
   },
 
   computed: {
-    /** Returns array of playerName with first name in [0] and
+    /** 
+     *  Returns array of playerName with first name in [0] and
      *  last name in [1], will be used for axios ajax calls
      */
     getNameArray () {
       return this.playerName.split(' ')
-    }
+    },
   },
 
   methods: {
@@ -52,6 +53,16 @@ export default {
         console.log(this.getNameArray[0], this.getNameArray[1])
         // this.$router.push('dfdf')
       }
+    },
+
+     /** 
+     *  Returns formatted name to use for API search
+     * 
+     *  @param {String} str player first or last name
+     *  @return {String} Capital case version of the name
+     */
+    makeCapitalCased (str) {
+      return str[0].toUpperCase() + str.substr(1, str.length - 1).toLowerCase()
     }
   }
 }

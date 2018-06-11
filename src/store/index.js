@@ -35,8 +35,10 @@ export const store = new Vuex.Store({
      * @param {String} pname the name of the player being searched
      * @returns {Boolean}
     */
-    playerIsFavorite (state, pname) {
-      return state.favoritedPlayers.includes(pname)
+    playerIsFavorite (state) {
+      return pname => {
+        return state.favoritedPlayers.includes(pname)
+      }
     }
   },
 
