@@ -16,7 +16,7 @@ test('Should return array words in string sentence', t => {
 	t.deepEqual(actual, expected)
 })
 
-test('Should return array words in string sentence', t => {
+test('Should return capital cased version or single word argument', t => {
 	const expected = 'Lebron'
 	const wrapper = shallow(AppHome)
 	

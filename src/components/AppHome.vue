@@ -35,29 +35,30 @@ export default {
   },
 
   computed: {
-    /** 
+    /**
      *  Returns array of playerName with first name in [0] and
      *  last name in [1], will be used for axios ajax calls
      */
     getNameArray () {
       return this.playerName.split(' ')
-    },
+    }
   },
 
   methods: {
-    /** Action done for when user submits search, wil redirect to
+    /**
+     *  Action done for when user submits search, wil redirect to
      *  the appropriate page using vue-router
      */
     doSearch () {
-      if (!this.playerName === '') { // enforce required attribute
-        console.log(this.getNameArray[0], this.getNameArray[1])
-        // this.$router.push('dfdf')
+      if (this.playerName !== '') { // enforce required attribute
+        let playerArr = this.getNameArray
+        this.$router.push(`/player/${this.makeCapitalCased(playerArr[1])}/${this.makeCapitalCased(playerArr[0])}`)
       }
     },
 
-     /** 
+    /**
      *  Returns formatted name to use for API search
-     * 
+     *
      *  @param {String} str player first or last name
      *  @return {String} Capital case version of the name
      */
