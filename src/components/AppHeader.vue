@@ -36,7 +36,7 @@ export default {
 
   data () {
     return {
-      authenticated: false,
+      authenticated: this.$store.getters.userLoggedIn,
       sideNav: false
     }
   },
@@ -55,7 +55,7 @@ export default {
           icon: 'far fa-clipboard'
         }
       ]
-      if (this.authenticated) {
+      if (this.$store.getters.userLoggedIn) {
         menuItems = [
           {
             name: 'Profile',

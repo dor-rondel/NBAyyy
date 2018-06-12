@@ -44,8 +44,8 @@ export default {
   methods: {
     doLogin () {
       console.log('button pressed')
+      this.$store.dispatch('signUserInAct')
       // log onto firebase
-      // update vuex store
       // this.$router.push('/profile')
     }
   }
