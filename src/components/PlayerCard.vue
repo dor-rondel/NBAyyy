@@ -78,14 +78,20 @@ export default {
   },
 
   computed: {
-    /** returns UI friendly array of API data */
+    /** 
+     * returns UI friendly array of API data 
+     * 
+     * @returns {Array} alphabetically sorted array of transformed field names
+    */
     outputtableData () {
       const final = []
       for (const key of Object.keys(this.playerProfile)) {
         let modKey = this.transformKey(key)
         final.push({ stat: modKey, value: this.playerProfile[key] })
       }
-      return final.sort()
+      return final.sort((stat1, stat2) => {
+        return stat1.stat.localeCompare(stat2.stat)
+      })
     },
 
     ...mapGetters([

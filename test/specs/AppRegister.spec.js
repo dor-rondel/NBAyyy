@@ -10,8 +10,8 @@ test('Should check that passwords are equal', t => {
 	const wrapper = shallow(AppRegister)
 	
 	wrapper.setData({
-        password: '123456',
-        confirmedPass: '123456'
+		password: '123456',
+		confirmedPass: '123456'
 	})
 
 	const result = wrapper.vm['$options'].computed.passwordsMatch.call(wrapper.vm)
@@ -23,8 +23,8 @@ test('Should check that passwords are not equal', t => {
 	const wrapper = shallow(AppRegister)
 	
 	wrapper.setData({
-        password: '123456',
-        confirmedPass: '123457'
+        	password: '123456',
+        	confirmedPass: '123457'
 	})
 
 	const result = wrapper.vm['$options'].computed.passwordsMatch.call(wrapper.vm)
@@ -38,8 +38,8 @@ test('Should check that passwords are not a valid length', t => {
 	const wrapper = shallow(AppRegister)
 	
 	wrapper.setData({
-        password: '123456',
-        confirmedPass: '123456'
+		password: '123456',
+		confirmedPass: '123456'
 	})
 
 	const result = wrapper.vm['$options'].computed.passwordValidLength.call(wrapper.vm)
@@ -51,8 +51,8 @@ test('Should check that passwords are not a valid length', t => {
 	const wrapper = shallow(AppRegister)
 	
 	wrapper.setData({
-        password: '1234',
-        confirmedPass: '1234'
+		password: '1234',
+		confirmedPass: '1234'
 	})
 
 	const result = wrapper.vm['$options'].computed.passwordValidLength.call(wrapper.vm)
