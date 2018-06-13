@@ -16,21 +16,28 @@
                             | favorite players to get a quick overview for their stats.
                         p Simply enter the player's name below, and click on the magnifying glass!
                     form
-                        v-text-field(label="Search Player"
-                                     color="red lighten-1"
-                                     required
-                                     v-model="playerName")
+                        v-select(label="Search Player"
+                                color="red lighten-1"
+                                autocomplete
+                                placeholder="Select..."
+                                :items="searchItems"
+                                required
+                                append-icon="fas fa-arrow-down"
+                                v-model="playerName")
                         v-btn(flat small type="submit" @click.prevent="doSearch")
                             v-icon(left) fas fa-search
 </template>
 
 <script>
+import playerList from '../data/players'
+
 export default {
   name: 'app-home',
 
   data () {
     return {
-      playerName: ''
+      playerName: '',
+      searchItems: playerList.map(player => player.first + ' ' + player.last)
     }
   },
 

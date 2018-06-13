@@ -23,20 +23,6 @@ test('Should transform API fields to UI friendly string', t => {
     t.is(actual, expected, 'correctly transforms "_" delimited API fields')
 })
 
-test('Should favorite a player and adjust icon accordingly', t => {
-    const expected = 'fas fa-heart'
-    const wrapper = shallow(PlayerCard, {
-        mocks: {
-            $store: store
-        },
-        localVue
-    })
-    
-    wrapper.vm['$options'].methods.toggleFavorite.call(wrapper.vm)
-    const actual = wrapper.vm._data.heartStatus
-    t.is(actual, expected, 'icon toggled correctly')
-})
-
 test('Return array of alphabetically sorted transformed field names', t => {
     const expected = [
         { stat: 'Blocks Per Game', value: 9 },
