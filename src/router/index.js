@@ -6,6 +6,7 @@ import Register from '@/components/AppRegister.vue'
 import SearchResult from '@/components/SearchResult.vue'
 import Profile from '@/components/Profile.vue'
 import NotFound from '@/components/NotFound.vue'
+import AuthGuard from './auth-guard'
 
 Vue.use(Router)
 
@@ -36,7 +37,8 @@ export default new Router({
     {
       path: '/user/profile',
       name: 'app-profile',
-      component: Profile
+      component: Profile,
+      beforeEnter: AuthGuard
     },
     {
       path: '*',

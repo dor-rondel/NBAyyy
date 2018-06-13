@@ -15,12 +15,12 @@ new Vue({
   render: h => h(App),
   created () {
     firebase.initializeApp({
-      apiKey: 'AIzaSyDIC7QmReJD4EqRemBAEcspWyBkckWmcvM',
+      apiKey: '',
       authDomain: 'nbayyy-417a8.firebaseapp.com',
       databaseURL: 'https://nbayyy-417a8.firebaseio.com',
       projectId: 'nbayyy-417a8',
       storageBucket: 'nbayyy-417a8.appspot.com',
-      messagingSenderId: '714897416225'
+      messagingSenderId: ''
     })
 
     // keep user logged in on refresh
