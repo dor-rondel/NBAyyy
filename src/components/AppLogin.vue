@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import * as firebase from 'firebase'
+
 export default {
   name: 'app-login',
 
@@ -43,10 +45,12 @@ export default {
 
   methods: {
     doLogin () {
-      console.log('button pressed')
-      this.$store.dispatch('signUserInAct')
-      // log onto firebase
-      // this.$router.push('/profile')
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+        .then(user => {
+          this.$store.dispatch('signUserInAct')
+          this.$router.push('/user/profile')
+        })
+        .catch(error => console.log(error))
     }
   }
 }

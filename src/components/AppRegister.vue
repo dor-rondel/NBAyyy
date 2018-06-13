@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import * as firebase from 'firebase'
+
 export default {
   name: 'app-login',
 
@@ -53,10 +55,16 @@ export default {
 
   methods: {
     doRegister () {
-      console.log('button pressed')
-      // register firebase
-      // update vuex store
-      // this.$router.push('/profile')
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+        .then(user => {
+          this.$store.dispatch('setUIDAct', user.user.uid)
+          this.$store.dispatch('signUserInAct')
+          firebase.firestore().collection('users').doc(user.user.uid).set({
+            favorites: []
+          })
+          this.$router.push('/user/profile')
+        })
+        .catch(error => console.log(error))
     }
   },
 

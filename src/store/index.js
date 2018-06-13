@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     favoritedPlayers: [], // String Array of player names
-    loggedIn: false
+    loggedIn: false,
+    uid: ''
   },
 
   getters: {
@@ -39,38 +40,47 @@ export const store = new Vuex.Store({
       return pname => {
         return state.favoritedPlayers.includes(pname)
       }
+    },
+
+    /**
+     * Returns uid of user from firebase
+     *
+     * @returns {String} unique UID
+    */
+    getUID (state) {
+      return state.uid
     }
   },
 
   mutations: {
     /** Signs user in. */
     signUserIn (state) {
-      // Some Firebase stuff
       state.loggedIn = true
     },
 
     /** Signs user out */
     signUserOut (state) {
-      // Some Firebase stuff
       state.loggedIn = false
     },
 
     /** favorites player */
     favoritePlayer (state, pname) {
-      // Some Firebase stuff
       state.favoritedPlayers.push(pname)
     },
 
     /** unfavorites player */
     unfavoritePlayer (state, pname) {
-      // Some Firebase stuff
       state.favoritedPlayers.splice(state.favoritedPlayers.indexOf(pname), 1)
     },
 
     /** sets players favorited array to firebase's version */
-    setFavoriteArray (state) {
-      // Reach out to Firebase
-      // state.favoritedPlayers =
+    setFavoriteArray (state, payload) {
+      state.favoritedPlayers = payload
+    },
+
+    /** sets UID from firebase */
+    setUID (state, payload) {
+      state.uid = payload
     }
   },
   actions: {
@@ -90,8 +100,12 @@ export const store = new Vuex.Store({
       commit('unfavoritePlayer', pname)
     },
 
-    setFavoriteArrayAct ({commit}) {
-      commit('setFavoriteArray')
+    setFavoriteArrayAct ({commit}, payload) {
+      commit('setFavoriteArray', payload)
+    },
+
+    setUIDAct ({commit}, payload) {
+      commit('setUID', payload)
     }
   }
 })

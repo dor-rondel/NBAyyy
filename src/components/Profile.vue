@@ -1,5 +1,7 @@
 <template lang="pug">
   v-container(fluid)
+    h2(v-if="emptyCheck" style="color: #ef5350; text-align: center")
+      | You Have No Favorited Players
     app-player-card(v-for="player in favoritedPlayers"
                     :firstName="player.split(' ')[0]"
                     :lastName="player.split(' ')[1]"
@@ -7,6 +9,7 @@
 </template>
 
 <script>
+import * as firebase from 'firebase'
 import PlayerCard from './PlayerCard.vue'
 
 export default {
@@ -16,19 +19,24 @@ export default {
     'app-player-card': PlayerCard
   },
 
-  data () {
-    return {
-      favoritedPlayers: [
-        'Lebron James',
-        'Stephen Curry',
-        'John Wall',
-        'Lonzo Ball'
-      ]
+  computed: {
+    favoritedPlayers () {
+      return this.$store.getters.getFavoritedPlayersArray
+    },
+
+    emptyCheck () {
+      return this.favoritedPlayers.length === 0
     }
   },
 
   created () {
-    // fetch fav players from firebase
+    firebase.firestore().collection('users').onSnapshot(snapshot => {
+      const favArr = snapshot.docs
+        .find(doc => doc.id === this.$store.getters.getUID)
+        .data()
+        .favorites
+      this.$store.dispatch('setFavoriteArrayAct', favArr)
+    })
   }
 }
 </script>

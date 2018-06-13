@@ -18,6 +18,7 @@
 
 <script>
 import axios from 'axios'
+import firebase from 'firebase'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -31,10 +32,6 @@ export default {
     firstName: {
       required: true,
       type: String
-    },
-    statsObj: {
-      required: true,
-      type: Object
     }
   },
 
@@ -62,13 +59,28 @@ export default {
 
     /** toggles player favorite status on page, store, and firebase */
     toggleFavorite () {
-      if (this.playerIsFavorite(this.firstName + ' ' + this.lastName)) {
-        this.unfavoritePlayerAct(this.firstName + ' ' + this.lastName)
-        this.heartStatus = 'far fa-heart'
+      const pname = this.firstName + ' ' + this.lastName
+      if (this.playerIsFavorite(pname)) {
+        this.unheartPlayer(pname)
       } else {
-        this.favoritePlayerAct(this.firstName + ' ' + this.lastName)
-        this.heartStatus = 'fas fa-heart'
+        this.heartPlayer(pname)
       }
+    },
+
+    heartPlayer (pname) {
+      this.favoritePlayerAct(pname)
+      this.heartStatus = 'fas fa-heart'
+      firebase.firestore().collection('users').doc(this.getUID).update({
+        favorites: this.getFavoritedPlayersArray
+      })
+    },
+
+    unheartPlayer (pname) {
+      this.unfavoritePlayerAct(pname)
+      this.heartStatus = 'far fa-heart'
+      firebase.firestore().collection('users').doc(this.getUID).update({
+        favorites: this.getFavoritedPlayersArray
+      })
     },
 
     ...mapActions([
@@ -78,9 +90,9 @@ export default {
   },
 
   computed: {
-    /** 
-     * returns UI friendly array of API data 
-     * 
+    /**
+     * returns UI friendly array of API data
+     *
      * @returns {Array} alphabetically sorted array of transformed field names
     */
     outputtableData () {
@@ -96,7 +108,9 @@ export default {
 
     ...mapGetters([
       'userLoggedIn',
-      'playerIsFavorite'
+      'playerIsFavorite',
+      'getUID',
+      'getFavoritedPlayersArray'
     ])
   },
 
@@ -109,6 +123,11 @@ export default {
       .catch(err => {
         console.log(err)
       })
+
+    // Make sure front-end reflects firebase
+    if (this.playerIsFavorite(this.firstName + ' ' + this.lastName)) {
+      this.heartStatus = 'fas fa-heart'
+    }
   }
 }
 </script>

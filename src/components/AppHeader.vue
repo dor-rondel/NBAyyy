@@ -9,6 +9,10 @@
           v-list-tile-action
             v-icon {{ item.icon }}
           v-list-tile-content {{ item.name }}
+        v-list-tile(to="/" @click="signOut" v-show="$store.getters.userLoggedIn")
+          v-list-tile-action
+            v-icon fas fa-sign-out-alt
+          v-list-tile-content Logout
 
     // Tablet & Desktop
     v-toolbar(flat color="rgba(0, 0, 0, 0.1)")
@@ -28,15 +32,23 @@
               color="red lighten-1")
               v-icon(left) {{ item.icon }}
               | {{ item.name }}
+        v-btn(to="/"
+              flat
+              color="red lighten-1"
+              @click="signOut"
+              v-show="$store.getters.userLoggedIn")
+              v-icon(left) fas fa-sign-out-alt
+              | Logout
 </template>
 
 <script>
+import * as firebase from 'firebase'
+
 export default {
   name: 'app-header',
 
   data () {
     return {
-      authenticated: this.$store.getters.userLoggedIn,
       sideNav: false
     }
   },
@@ -59,17 +71,20 @@ export default {
         menuItems = [
           {
             name: 'Profile',
-            link: '/profile',
+            link: '/user/profile',
             icon: 'fas fa-user-circle'
-          },
-          {
-            name: 'Logout',
-            link: '/',
-            icon: 'fas fa-sign-out-alt'
           }
         ]
       }
       return menuItems
+    }
+  },
+
+  methods: {
+    signOut () {
+      firebase.auth().signOut()
+      this.$store.dispatch('signUserOutAct')
+      this.$store.dispatch('setUIDAct', '')
     }
   }
 }
